@@ -7,6 +7,7 @@ import { styles } from "./styles";
 import { Start } from "./Start";
 import { GameOver } from "./GameOver";
 import { Text, View, Image } from "react-native";
+import BASE from "../../../assets/images/base.png";
 
 import One from "../../../assets/images/1.png";
 import Two from "../../../assets/images/2.png";
@@ -51,7 +52,7 @@ const Game = () => {
   const [scoreSaved, setScoreSaved] = useState(0);
   const { address } = useAccount();
   const gameEngineRef = useRef();
-  const skin = useSelector((state:State) => state.changeBirdColor.birdColor);
+  const skin = useSelector((state: State) => state.changeBirdColor.birdColor);
   const dispatch = useDispatch();
 
 
@@ -90,10 +91,14 @@ const Game = () => {
 
   const renderImage = (Points) => {
     if (Points < 10) {
+      const imageStyle = Points === 1
+        ? { width: 100, height: 150 }
+        : { width: 44.5, height: 150 };
+
       return (
         <Image
           source={numberImages[Points]}
-          style={{ width: 50, height: 70, alignSelf: "center", marginTop: 20 }}
+          style={{ alignSelf: "center", marginTop: 20 }}
         />
       );
     } else {
@@ -105,11 +110,11 @@ const Game = () => {
         >
           <Image
             source={numberImages[firstDigit]}
-            style={{ width: 50, height: 70 }}
+            style={firstDigit === 1 ? { width: 44.5, height: 150 } : { width: 100, height: 150 }}
           />
           <Image
             source={numberImages[secondDigit]}
-            style={{ width: 50, height: 70 }}
+            style={secondDigit === 1 ? { width: 44.5, height: 150 } : { width: 100, height: 150 }}
           />
         </View>
       );
@@ -117,7 +122,7 @@ const Game = () => {
   };
 
   if (!running && !isGameOver) {
-    addScoreToFirebase(address?.toString(), currentPoints); 
+    addScoreToFirebase(address?.toString(), currentPoints);
     return <Start handleOnStart={handleOnStart} />;
   }
 
@@ -136,6 +141,7 @@ const Game = () => {
         onEvent={handleOnEvent}
         style={styles.engineContainer}
       />
+      <Image source={BASE} style={{ position: "absolute", bottom: 0, width: "100%", height: 150 }} />
     </View>
   );
 };
