@@ -77,7 +77,7 @@ const Store: React.FC = () => {
     address: address,
     watch: true,
   });
-  
+
 
   const { data: userNftBalance } = useContractRead({
     address: birdAddress as any, // Bird address
@@ -112,7 +112,7 @@ const Store: React.FC = () => {
     args: [address],
     enabled: true,
     watch: true,
-    onSuccess(){
+    onSuccess() {
       fetchUserNfts(usersNftInfo);
     }
   });
@@ -135,12 +135,12 @@ const Store: React.FC = () => {
 
   const navigation = useNavigation<NavigationProp<any>>();
   const handleCardPress = (nft: any, index: number) => {
-    
-    navigation.navigate("NftDetail", { data: nft, id: nfts[index]?.tokenId, price: nfts[index]?.price as any});
+
+    navigation.navigate("NftDetail", { data: nft, id: nfts[index]?.tokenId, price: nfts[index]?.price as any });
   };
 
   const handleDetailListPress = (nft: any, id: any) => {
-    
+
     navigation.navigate("NftDetailList", { data: nft, id: id });
   };
 
@@ -153,43 +153,43 @@ const Store: React.FC = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-      {/* <View style={styles.header}>
+        {/* <View style={styles.header}>
         <HeaderBackButton onPress={() => navigation.goBack()} />
       </View> */}
         <View style={styles.connectedView}>
           <View style={styles.card}>
-          <View style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                    }}>
-                      <Text>Your FLP Balance </Text>
-                        <Image
-                            source={require('../../../src/assets/images/medal_gold.png')}
-                            style={styles.iconCoin}
-                        />
+            <View style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}>
+              <Text>Your FLP Balance </Text>
+              <Image
+                source={require('../../../src/assets/images/medal_gold.png')}
+                style={styles.iconCoin}
+              />
               <Text>
-              {" "}
-              {parseFloat((userTokenBalance as any)?.toString()) / 1e18}
-            </Text>
-          </View>
+                {" "}
+                {parseFloat((userTokenBalance as any)?.toString()) / 1e18}
+              </Text>
+            </View>
           </View>
 
-          
+
           <View style={styles.card}>
-          <View style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                    }}>
-                      <Text>Your RON Balance </Text>
-                        <Image
-                            source={require('../../../src/assets/images/ronin_logo.png')}
-                            style={styles.iconCoin}
-                        />
+            <View style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}>
+              <Text>Your RON Balance </Text>
+              <Image
+                source={require('../../../src/assets/images/ronin_logo.png')}
+                style={styles.iconCoin}
+              />
               <Text>
-              {" "}
-              {parseFloat((ronBalance?.value as any)?.toString()) / 1e18}
-            </Text>
-          </View>
+                {" "}
+                {parseFloat((ronBalance?.value as any)?.toString()) / 1e18}
+              </Text>
+            </View>
           </View>
           <View style={styles.card}>
             <Text>NFT for sells:</Text>
@@ -209,7 +209,7 @@ const Store: React.FC = () => {
                       price={nfts[index]?.price as any}
                       isTransfer={true}
                       isList={false}
-                      onPress={() => handleCardPress(nft,index)}
+                      onPress={() => handleCardPress(nft, index)}
                     />
                   );
                 })
@@ -227,7 +227,7 @@ const Store: React.FC = () => {
             >
               {state?.userNfts && state?.userNfts.length > 0 ? (
                 state?.userNfts?.map((nft, index) => {
-                  
+
                   return (
                     <NFTCard
                       key={index}

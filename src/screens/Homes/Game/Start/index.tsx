@@ -1,4 +1,4 @@
-import { View, Image, TouchableWithoutFeedback, TouchableOpacity,ActivityIndicator} from "react-native";
+import { View, Image, TouchableWithoutFeedback, TouchableOpacity, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 
 import LOGO from "../../../../assets/images/logo.png";
@@ -26,24 +26,24 @@ const Start = ({ handleOnStart }) => {
   const { disconnect } = useDisconnect()
   const handleDisconnect = async () => {
     setIsLoading(true);
-    try{
+    try {
       await disconnect();
     }
-    catch(e){
+    catch (e) {
     }
     setIsLoading(false);
   }
 
-  
+
 
 
   return (
     <View style={styles.container}>
       {isLoading ? (
         <SafeAreaView style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" /> 
+          <ActivityIndicator size="large" color="#0000ff" />
         </SafeAreaView>
-   
+
       ) : (
         <>
           <Image source={LOGO} style={styles.logo} />
@@ -53,7 +53,7 @@ const Start = ({ handleOnStart }) => {
                 <Image source={PLAY} style={styles.playButton} />
               </TouchableOpacity>
               <Button text="Disconnect" onPress={handleDisconnect} />
-              <Button text="Market Place" onPress={() => navigation.navigate('Wrapper')} />
+              <Button text="Market Place" onPress={() => navigation.navigate('StoreTab')} />
             </>
           ) : (
             <Button text="Connect Wallet" onPress={handleConnect} />

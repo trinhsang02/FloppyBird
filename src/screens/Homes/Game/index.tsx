@@ -92,14 +92,16 @@ const Game = () => {
   const renderImage = (Points) => {
     if (Points < 10) {
       const imageStyle = Points === 1
-        ? { width: 100, height: 150 }
-        : { width: 44.5, height: 150 };
+        ? { width: 50, height: 75 }
+        : { width: 22.3, height: 75 };
 
       return (
-        <Image
-          source={numberImages[Points]}
-          style={{ alignSelf: "center", marginTop: 20 }}
-        />
+        <View style={{ alignSelf: "center", marginTop: 20 }}>
+          <Image
+            source={numberImages[Points]}
+            style={Points === 1 ? { width: 30, height: 75 } : { width: 50, height: 75 }}
+          />
+        </View>
       );
     } else {
       const firstDigit = Math.floor(Points / 10);
@@ -110,11 +112,11 @@ const Game = () => {
         >
           <Image
             source={numberImages[firstDigit]}
-            style={firstDigit === 1 ? { width: 44.5, height: 150 } : { width: 100, height: 150 }}
+            style={firstDigit === 1 ? { width: 30, height: 75 } : { width: 50, height: 75 }}
           />
           <Image
             source={numberImages[secondDigit]}
-            style={secondDigit === 1 ? { width: 44.5, height: 150 } : { width: 100, height: 150 }}
+            style={secondDigit === 1 ? { width: 30, height: 75 } : { width: 50, height: 75 }}
           />
         </View>
       );

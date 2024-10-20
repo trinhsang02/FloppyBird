@@ -139,7 +139,7 @@ const Swap = () => {
     } else if (
       coins.coin1 === "FLP" &&
       parseFloat((approvedAmount as any)?.toString()) / 1e18 <
-        Number(coinAmount1)
+      Number(coinAmount1)
     ) {
       return txLoading ? "Approving..." : "Approve spending cap";
     } else {
@@ -157,7 +157,7 @@ const Swap = () => {
     } else if (
       coins.coin1 === "FLP" &&
       parseFloat((approvedAmount as any)?.toString()) / 1e18 >
-        Number(coinAmount1)
+      Number(coinAmount1)
     ) {
       return false;
     } else {
@@ -186,7 +186,7 @@ const Swap = () => {
       const txHash = (await onApprove?.()).hash;
       console.log(txHash);
       setTxLoading(false);
-    } catch (error) {}
+    } catch (error) { }
   };
   const onClickBuyRon = async () => {
     try {
@@ -195,7 +195,7 @@ const Swap = () => {
       const txHash = (await onBuyRonByFLP?.()).hash;
       console.log(txHash);
       setTxLoading(false);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const onClickBuyToken = async () => {
@@ -205,7 +205,7 @@ const Swap = () => {
       const txHash = (await onBuyTokenByRON?.()).hash;
       console.log(txHash);
       setTxLoading(false);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleButtonClick = async () => {
@@ -215,7 +215,7 @@ const Swap = () => {
       if (
         coins.coin1 === "FLP" &&
         parseFloat((approvedAmount as any)?.toString()) / 1e18 <
-          Number(coinAmount1)
+        Number(coinAmount1)
       ) {
         onClickApprove();
       } else {
@@ -256,9 +256,9 @@ const Swap = () => {
               }}
             >
               <View style={styles.coinWrapper}>
-              <Image source={coinLogo.coin1} style={styles.icon} />
+                <Image source={coinLogo.coin1} style={styles.icon} />
 
-              <Text style={styles.coin}>{coins.coin1}</Text>
+                <Text style={styles.coin}>{coins.coin1}</Text>
               </View>
             </View>
             <Text style={styles.balance}>Balance: {balance.coin1}</Text>
@@ -303,8 +303,8 @@ const Swap = () => {
               }}
             >
               <View style={styles.coinWrapper}>
-              <Image source={coinLogo.coin2} style={styles.icon} />
-              <Text style={styles.coin}>{coins.coin2}</Text>
+                <Image source={coinLogo.coin2} style={styles.icon} />
+                <Text style={styles.coin}>{coins.coin2}</Text>
               </View>
             </View>
             <Text style={styles.balance}>Balance: {balance.coin2}</Text>
@@ -332,8 +332,8 @@ const Swap = () => {
           </Text>
         </View>
         {parseEther(approvedAmount) < Number(coinAmount1) &&
-        coins.coin1 === "FLP" &&
-        Number(coinAmount1) <= Number(balance.coin1) ? (
+          coins.coin1 === "FLP" &&
+          Number(coinAmount1) <= Number(balance.coin1) ? (
           <View style={styles.approvecontainer}>
             <Image
               source={require('../../assets/icons/warning.png')}
@@ -342,33 +342,33 @@ const Swap = () => {
                 height: 20,
               }}
             />
-            <View 
-              style = {{
+            <View
+              style={{
                 flexDirection: "column",
                 marginLeft: 10,
               }}>
-            <Text
-              style={{
-                color: "#FFFFFF",
-                fontSize: 15,
-                textAlign: "left",
-                marginBottom: 10,
-                fontWeight: "600"
-              }}
-            >
-              Approve spending cap
-            </Text>
-            <Text
-              style={{
-                color: "#FFFFFF",
-                fontSize: 15,
-                textAlign: "left",
-                fontWeight: "200"
-              }}
-            >
-              Your current spending cap is {parseEther(approvedAmount)} FLP.
-              Please approve new spending cap
-            </Text>
+              <Text
+                style={{
+                  color: "#FFFFFF",
+                  fontSize: 15,
+                  textAlign: "left",
+                  marginBottom: 10,
+                  fontWeight: "600"
+                }}
+              >
+                Approve spending cap
+              </Text>
+              <Text
+                style={{
+                  color: "#FFFFFF",
+                  fontSize: 15,
+                  textAlign: "left",
+                  fontWeight: "200"
+                }}
+              >
+                Your current spending cap is {parseEther(approvedAmount)} FLP.
+                Please approve new spending cap
+              </Text>
             </View>
           </View>
         ) : null}
