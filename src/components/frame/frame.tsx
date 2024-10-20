@@ -14,7 +14,7 @@ const Frame = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.outerFrame}>
+      {/* <View style={styles.outerFrame}>
         <LinearGradient
           colors={['#6688F2', '#DF6D8B']}
           start={{ x: 0, y: 0 }}
@@ -43,7 +43,7 @@ const Frame = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

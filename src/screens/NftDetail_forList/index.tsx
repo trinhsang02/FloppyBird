@@ -43,7 +43,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { State, actionCreators } from "../../redux";
 import { useSelector } from "react-redux";
-import BottomMenu from "../../components/BottomMenu/BottomMenu";
+import { ImageBackground } from 'react-native';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { HeaderBackButton } from "@react-navigation/elements";
 import Frame from "../../components/frame/frame";
@@ -91,7 +91,7 @@ const NFTDetailList = ({ route }) => {
     if (isShowDefaultImageBlueBird) color = "blue";
     if (isShowDefaultImageRedBird) color = "red";
     if (isShowIPFSimage) color = "yellow";
-    
+
     dispatch(changeBirdColor(color) as any);
     Alert.alert(
       "Bird Color Changed",
@@ -164,8 +164,8 @@ const NFTDetailList = ({ route }) => {
 
   const buttonText = () => {
     if (txLoading && approvedAddress?.toString().toLowerCase() != marketPlaceAddress) return "Approving...";
-    else if(approvedAddress?.toString().toLowerCase() != marketPlaceAddress) return "Approve";
-    else if(txLoading && approvedAddress?.toString().toLowerCase() == marketPlaceAddress) return "Listing..."
+    else if (approvedAddress?.toString().toLowerCase() != marketPlaceAddress) return "Approve";
+    else if (txLoading && approvedAddress?.toString().toLowerCase() == marketPlaceAddress) return "Listing..."
     else return "List Now";
   };
 
@@ -179,7 +179,7 @@ const NFTDetailList = ({ route }) => {
         const txHash = (await onApproveNft?.()).hash;
         console.log(txHash);
         setTxLoading(false);
-      } catch (error) {}
+      } catch (error) { }
     } else {
       console.log("Listing NFT......");
       try {
@@ -190,116 +190,121 @@ const NFTDetailList = ({ route }) => {
         if (txHash.toString().length > 0) {
           navigation.goBack();
         }
-      } catch (error) {}
+      } catch (error) { }
     }
   };
 
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <HeaderBackButton onPress={() => navigation.goBack()} />
-        </View>
-        <View style={styles.content}>
-          <Frame />
-          {isShowDefaultImageBlueBird && (
-            <Image
-              source={require("../../assets/images/bluebird-midflap.png")}
-              style={styles.overlayImage}
-            />
-          )}
-          {isShowDefaultImageRedBird && (
-            <Image
-              source={require("../../assets/images/redbird-midflap.png")}
-              style={styles.overlayImage}
-            />
-          )}
-          {isShowIPFSimage && (
-            <Image
-              source={require("../../assets/images/yellowbird-midflap.png")}
-              style={styles.overlayImage}
-            />
-          )}
-
-          <View style={styles.containerPrice}>
-            <TextInput
-              style={styles.text}
-              numberOfLines={1}
-              placeholder="0.0"
-              keyboardType="numeric"
-              value={nftPrice}
-              onChangeText={setNftPrice}
-              maxLength={10}
-              editable = {approvedAddress?.toString().toLowerCase() == marketPlaceAddress}
-            />
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <ImageBackground
+      source={require('../../assets/images/Background_Store.png')}
+      style={{ flex: 1 }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <HeaderBackButton onPress={() => navigation.goBack()} />
+          </View>
+          <View style={styles.content}>
+            <Frame />
+            {isShowDefaultImageBlueBird && (
               <Image
-                source={require("../../../src/assets/images/medal_gold.png")}
-                style={styles.iconCoin}
+                source={require("../../assets/images/bluebird-midflap.png")}
+                style={styles.overlayImage}
               />
-              <Text style={styles.unitText}>FLP</Text>
+            )}
+            {isShowDefaultImageRedBird && (
+              <Image
+                source={require("../../assets/images/redbird-midflap.png")}
+                style={styles.overlayImage}
+              />
+            )}
+            {isShowIPFSimage && (
+              <Image
+                source={require("../../assets/images/yellowbird-midflap.png")}
+                style={styles.overlayImage}
+              />
+            )}
+
+            <View style={styles.containerPrice}>
+              <TextInput
+                style={styles.text}
+                numberOfLines={1}
+                placeholder="0.0"
+                keyboardType="numeric"
+                value={nftPrice}
+                onChangeText={setNftPrice}
+                maxLength={10}
+                editable={approvedAddress?.toString().toLowerCase() == marketPlaceAddress}
+              />
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image
+                  source={require("../../../src/assets/images/medal_gold.png")}
+                  style={styles.iconCoin}
+                />
+                <Text style={styles.unitText}>FLP</Text>
+              </View>
+            </View>
+            <Text style={styles.title}> The Flappy Bird NFT #{id.toString()} </Text>
+            {approvedAddress?.toString().toLowerCase() != marketPlaceAddress ? (
+              <View style={styles.approvecontainer}>
+                <Image
+                  source={require('../../assets/icons/warning.png')}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+                <View style={{
+                  flexDirection: "column",
+                  marginLeft: 10,
+                }}>
+                  <Text
+                    style={{
+                      color: "#FFFFFF",
+                      fontSize: 15,
+                      textAlign: "left",
+                      marginBottom: 10,
+                      fontWeight: "600"
+                    }}
+                  >
+                    Approve transfering the NFT
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#FFFFFF",
+                      fontSize: 15,
+                      textAlign: "left",
+                      fontWeight: "200"
+                    }}
+                  >
+                    This NFT cannot be listed for transfer on the market yet. Please approve it first.
+                  </Text>
+                </View>
+              </View>
+            ) : null}
+            {/* select skin button */}
+            <TouchableOpacity style={styles.button}
+              onPress={() => handleBirdColorChange()}
+            >
+              <Text style={styles.buttonText}>Select Skin</Text>
+            </TouchableOpacity>
+
+
+            {/* Button to list now */}
+            <View>
+              <TouchableOpacity
+                style={buttonStyle()}
+                onPress={() => handleListNFT()}
+                disabled={txLoading}
+              >
+                <Text style={styles.buttonText}>{buttonText()}</Text>
+              </TouchableOpacity>
             </View>
           </View>
-          <Text style={styles.title}> The Flappy Bird NFT #{id.toString()} </Text>
-          {approvedAddress?.toString().toLowerCase() != marketPlaceAddress ? (
-                        <View style={styles.approvecontainer}>
-                        <Image
-                          source={require('../../assets/icons/warning.png')}
-                          style ={{
-                            width: 20,
-                            height: 20,
-                          }}  
-                        />
-                        <View style = {{
-                          flexDirection: "column",
-                          marginLeft: 10,
-                        }}>
-                          <Text
-                            style={{
-                              color: "#FFFFFF",
-                              fontSize: 15,
-                              textAlign: "left",
-                              marginBottom: 10,
-                              fontWeight: "600"
-                            }}
-                          >
-                            Approve transfering the NFT
-                          </Text>
-                          <Text
-                            style={{
-                              color: "#FFFFFF",
-                              fontSize: 15,
-                              textAlign: "left",
-                              fontWeight: "200"
-                            }}
-                          >
-                            This NFT cannot be listed for transfer on the market yet. Please approve it first.
-                          </Text>
-                        </View>
-                      </View>
-          ) : null}
-          {/* select skin button */}
-          <TouchableOpacity style={styles.button} 
-          onPress={() => handleBirdColorChange()}
-          >
-            <Text style={styles.buttonText}>Select Skin</Text>
-          </TouchableOpacity>
-          
-
-          {/* Button to list now */}
-          <View>
-            <TouchableOpacity
-              style={buttonStyle()}
-              onPress={() => handleListNFT()}
-              disabled = {txLoading}
-            >
-              <Text style={styles.buttonText}>{buttonText()}</Text>
-            </TouchableOpacity>
-          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   );
 };
 
@@ -307,7 +312,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "white",
   },
   header: {
     marginBottom: 15,

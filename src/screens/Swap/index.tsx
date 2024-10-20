@@ -22,7 +22,7 @@ import {
   usePrepareContractWrite,
 } from "wagmi";
 import { useStateContext } from "../../context";
-import BottomMenu from "../../components/BottomMenu/BottomMenu";
+import { ImageBackground } from 'react-native';
 import {
   getBirdMarketPlaceAddress,
   getFLPCrowdSaleAddress,
@@ -33,6 +33,7 @@ import {
   getFloppyAbi,
 } from "../../contracts/utils/getAbis";
 import { parseEther } from "../../contracts/utils/parseEther";
+import {ArrowPathIcon, InformationCircleIcon} from 'react-native-heroicons/outline'
 
 const Swap = () => {
   const { address } = useStateContext();
@@ -242,145 +243,144 @@ const Swap = () => {
     }
   }, [ronBalance, userTokenBalance]);
   return (
+
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Exchange</Text>
-        <Text style={styles.text}>Swap your coins</Text>
-        <View style={styles.rectangle}>
-          <View style={styles.coinContainer}>
-            <Text style={styles.header}>{"You sell :"}</Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <View style={styles.coinWrapper}>
-                <Image source={coinLogo.coin1} style={styles.icon} />
+      <ImageBackground
+        source={require('../../assets/images/Background_Store.png')}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.container}>
+          {/* <Text style={styles.title}>Exchange</Text> */}
+          <Text style={styles.text}>Swap your coins</Text>
+          <View style={styles.rectangle}>
+            <View style={styles.coinContainer}>
+              <Text style={styles.header}>{"You sell :"}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <View style={styles.coinWrapper}>
+                  <Image source={coinLogo.coin1} style={styles.icon} />
 
-                <Text style={styles.coin}>{coins.coin1}</Text>
+                  <Text style={styles.coin}>{coins.coin1}</Text>
+                </View>
               </View>
+              <Text style={styles.balance}>Balance: {balance.coin1}</Text>
             </View>
-            <Text style={styles.balance}>Balance: {balance.coin1}</Text>
-          </View>
 
-          <TextInput
-            style={
-              Number(coinAmount1) > Number(balance.coin1)
-                ? styles.textInputError
-                : styles.textInput
-            }
-            onChangeText={(text) => {
-              setCoinAmount1(text);
-            }}
-            value={coinAmount1}
-            keyboardType="numeric"
-            onFocus={() => {
-              setCoinAmount1("");
-            }}
-            placeholder="0.0"
-          />
-        </View>
-
-        <TouchableOpacity
-          onPress={() => {
-            swapCoins();
-          }}
-        >
-          <Image
-            source={require("../../assets/images/coin-swap.png")}
-            style={{ width: 50, height: 50, marginBottom: 24, marginTop: 24 }}
-          />
-        </TouchableOpacity>
-
-        <View style={styles.rectangle}>
-          <View style={styles.coinContainer}>
-            <Text style={styles.header}>{"You buy :"}</Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
+            <TextInput
+              style={
+                Number(coinAmount1) > Number(balance.coin1)
+                  ? styles.textInputError
+                  : styles.textInput
+              }
+              onChangeText={(text) => {
+                setCoinAmount1(text);
               }}
-            >
-              <View style={styles.coinWrapper}>
-                <Image source={coinLogo.coin2} style={styles.icon} />
-                <Text style={styles.coin}>{coins.coin2}</Text>
-              </View>
-            </View>
-            <Text style={styles.balance}>Balance: {balance.coin2}</Text>
-          </View>
-          <TextInput
-            style={styles.textInput}
-            placeholder="0.0"
-            // onChangeText={(text) => {
-            //   setCoinAmount2(text);
-            // }}
-            value={(Number(coinAmount1) * rates).toString()}
-            keyboardType="numeric"
-            onFocus={() => {
-              setCoinAmount2("");
-            }}
-            editable={false}
-          />
-        </View>
-
-        <View style={styles.rectangle}>
-          <Text style={styles.rate}>
-            {coins.coin1 === "RON" && coins.coin2 === "FLP"
-              ? `1 RON = ${defaultRate} FLP`
-              : `1 FLP = ${1 / defaultRate} RON`}
-          </Text>
-        </View>
-        {parseEther(approvedAmount) < Number(coinAmount1) &&
-          coins.coin1 === "FLP" &&
-          Number(coinAmount1) <= Number(balance.coin1) ? (
-          <View style={styles.approvecontainer}>
-            <Image
-              source={require('../../assets/icons/warning.png')}
-              style={{
-                width: 20,
-                height: 20,
+              value={coinAmount1}
+              keyboardType="numeric"
+              onFocus={() => {
+                setCoinAmount1("");
               }}
+              placeholder="0.0"
             />
-            <View
-              style={{
-                flexDirection: "column",
-                marginLeft: 10,
-              }}>
-              <Text
-                style={{
-                  color: "#FFFFFF",
-                  fontSize: 15,
-                  textAlign: "left",
-                  marginBottom: 10,
-                  fontWeight: "600"
-                }}
-              >
-                Approve spending cap
-              </Text>
-              <Text
-                style={{
-                  color: "#FFFFFF",
-                  fontSize: 15,
-                  textAlign: "left",
-                  fontWeight: "200"
-                }}
-              >
-                Your current spending cap is {parseEther(approvedAmount)} FLP.
-                Please approve new spending cap
-              </Text>
-            </View>
           </View>
-        ) : null}
-        <TouchableOpacity
-          style={buttonStyle()}
-          disabled={checkDisabled()}
-          onPress={() => handleButtonClick()}
-        >
-          <Text style={styles.buttonText}>{buttonText()}</Text>
-        </TouchableOpacity>
-      </View>
+
+          <TouchableOpacity
+            onPress={() => {
+              swapCoins();
+            }}
+          >
+            <ArrowPathIcon color = 'white' size = "50" />
+
+          </TouchableOpacity>
+
+          <View style={styles.rectangle}>
+            <View style={styles.coinContainer}>
+              <Text style={styles.header}>{"You buy :"}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <View style={styles.coinWrapper}>
+                  <Image source={coinLogo.coin2} style={styles.icon} />
+                  <Text style={styles.coin}>{coins.coin2}</Text>
+                </View>
+              </View>
+              <Text style={styles.balance}>Balance: {balance.coin2}</Text>
+            </View>
+            <TextInput
+              style={styles.textInput}
+              placeholder="0.0"
+              // onChangeText={(text) => {
+              //   setCoinAmount2(text);
+              // }}
+              value={(Number(coinAmount1) * rates).toString()}
+              keyboardType="numeric"
+              onFocus={() => {
+                setCoinAmount2("");
+              }}
+              editable={false}
+            />
+          </View>
+
+          <View style={styles.rectangle}>
+            <Text style={styles.rate}>
+              {coins.coin1 === "RON" && coins.coin2 === "FLP"
+                ? `1 RON = ${defaultRate} FLP`
+                : `1 FLP = ${1 / defaultRate} RON`}
+            </Text>
+          </View>
+          {parseEther(approvedAmount) < Number(coinAmount1) &&
+            coins.coin1 === "FLP" &&
+            Number(coinAmount1) <= Number(balance.coin1) ? (
+            <View style={styles.approvecontainer}>
+              <InformationCircleIcon color = 'black'/>
+              <View
+                style={{
+                  flexDirection: "column",
+                  marginLeft: 10,
+                }}>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 15,
+                    textAlign: "left",
+                    marginBottom: 10,
+                    fontWeight: "600"
+                  }}
+                >
+                  Approve spending cap
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 15,
+                    textAlign: "left",
+                    fontWeight: "200"
+                  }}
+                >
+                  Your current spending cap is {parseEther(approvedAmount)} FLP.
+                  Please approve new spending cap
+                </Text>
+              </View>
+            </View>
+          ) : null}
+          <TouchableOpacity
+            style={buttonStyle()}
+            disabled={checkDisabled()}
+            onPress={() => handleButtonClick()}
+          >
+            <Text style={styles.buttonText}>{buttonText()}</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </TouchableWithoutFeedback>
+
   );
 };
 

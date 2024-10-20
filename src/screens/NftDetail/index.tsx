@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { NftProps } from "../../type";
 import { useNavigation } from "@react-navigation/native";
+import { ImageBackground } from 'react-native';
 import { HeaderBackButton } from "@react-navigation/elements";
 import {
   useAccount,
@@ -197,6 +198,10 @@ const NFTDetail = ({ route }) => {
   };
 
   return (
+    <ImageBackground
+    source={require('../../assets/images/Background_Store.png')}
+    style={{ flex: 1 }}
+  >
     <View style={styles.container}>
       <View style={styles.header}>
         <HeaderBackButton onPress={() => navigation.goBack()} />
@@ -308,6 +313,7 @@ const NFTDetail = ({ route }) => {
         </View>
       </View>
     </View>
+  </ImageBackground>
   );
 };
 
@@ -315,7 +321,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "white",
   },
   header: {
     marginBottom: 15,

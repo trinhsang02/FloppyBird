@@ -1,6 +1,7 @@
 import React from "react";
 import { RefreshControl, ScrollView, Text, View, Image } from "react-native";
 import { ListedNFT, NftData } from "../../type";
+import { ImageBackground } from 'react-native';
 import {
   getBirdAbi,
   getBirdMarketPlaceAbi,
@@ -30,7 +31,6 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { State, actionCreators } from "../../redux";
 import { useSelector } from "react-redux";
-import BottomMenu from "../../components/BottomMenu/BottomMenu";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { HeaderBackButton } from "@react-navigation/elements";
 
@@ -145,7 +145,10 @@ const Store: React.FC = () => {
   };
 
   return (
-    <>
+    <ImageBackground
+      source={require('../../assets/images/Background_Store.png')}
+      style={{ flex: 1 }}
+    >
       <ScrollView
         horizontal={false}
         showsHorizontalScrollIndicator={false}
@@ -251,7 +254,7 @@ const Store: React.FC = () => {
           {/* refreshing ={} */}
         </View>
       </ScrollView>
-    </>
+    </ImageBackground>
   );
 };
 
