@@ -202,9 +202,6 @@ const NFTDetailList = ({ route }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
-          <View style={styles.header}>
-            <HeaderBackButton onPress={() => navigation.goBack()} />
-          </View>
           <View style={styles.content}>
             <Frame />
             {isShowDefaultImageBlueBird && (
@@ -310,8 +307,8 @@ const NFTDetailList = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
+    
+    
   },
   header: {
     marginBottom: 15,

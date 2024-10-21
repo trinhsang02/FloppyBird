@@ -35,6 +35,8 @@ import {
 import { useStateContext } from "../../context";
 import Frame from "../../components/frame/frame";
 import { parseEther } from "../../contracts/utils/parseEther";
+import Header from "../../components/Header";
+
 
 
 
@@ -202,10 +204,8 @@ const NFTDetail = ({ route }) => {
     source={require('../../assets/images/Background_Store.png')}
     style={{ flex: 1 }}
   >
+    <Header address={address} screenName="Store"/>
     <View style={styles.container}>
-      <View style={styles.header}>
-        <HeaderBackButton onPress={() => navigation.goBack()} />
-      </View>
       <View style={styles.content}>
         <Frame />
         {isShowDefaultImageBlueBird && (
@@ -321,9 +321,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-  },
-  header: {
-    marginBottom: 15,
   },
   title: {
     fontSize: 30,

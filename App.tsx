@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
 import RootProvider from "./src/providers";
 import { NavigationContainer } from '@react-navigation/native';
 import * as NavigationBar from 'expo-navigation-bar';
+import { Platform, StyleSheet } from 'react-native';
 
-import { HeaderBackButton } from '@react-navigation/elements';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context'; // đảm bảo không bị che bởi thanh trạng thái
 
 import { Home } from "./src/screens/Homes";
 import { Store } from "./src/screens/Store";
@@ -17,8 +17,7 @@ import NFTDetailList from "./src/screens/NftDetail_forList";
 import { StateContextProvider } from "./src/context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ShoppingBagIcon, ArrowPathRoundedSquareIcon } from 'react-native-heroicons/outline'
-
+import { ShoppingBagIcon, ArrowPathRoundedSquareIcon } from 'react-native-heroicons/outline';
 
 export default function App() {
 
@@ -27,7 +26,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    NavigationBar.setBackgroundColorAsync('#D9D9D9'); //change system navigationBar in android device
+    if (Platform.OS === 'android') {
+      NavigationBar.setBackgroundColorAsync('#D9D9D9'); // Change color navigation system for android device
+    }
   }, []);
 
   const Stack = createNativeStackNavigator();
@@ -45,23 +46,13 @@ export default function App() {
 
   function StoreTabNavigation() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-
         <Tab.Navigator
           screenOptions={{
             headerShown: false,
             tabBarActiveTintColor: 'blue',
             tabBarInactiveTintColor: 'black',
-            tabBarStyle: {
-              backgroundColor: '#D9D9D9',
-              position: 'relative',
-
-            },
-            tabBarIconStyle: {
-              top: 10,
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
+            tabBarStyle: styles.tabBarStyle,   
+            tabBarIconStyle: styles.tabBarIconStyle,
           }}
         >
           <Tab.Screen
@@ -79,11 +70,10 @@ export default function App() {
               headerShown: false,
               tabBarLabel: '',
               tabBarIcon: ({ color, size }) => <ArrowPathRoundedSquareIcon color={color} size={size} />
-
             }} />
         </Tab.Navigator>
-      </SafeAreaView>
-    )
+     
+    );
   }
 
   function AppNavigation() {
@@ -97,7 +87,7 @@ export default function App() {
           component={StoreTabNavigation}
           options={{ headerShown: false }} />
       </Stack.Navigator>
-    )
+    );
   }
 
   return (
@@ -111,3 +101,16 @@ export default function App() {
     </RootProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBarStyle: {
+    backgroundColor: Platform.OS === 'android' ? '#D9D9D9' : '#FFFFFF',
+    position: 'relative',
+    height: Platform.OS === 'ios' ? 60 : 50, 
+  },
+  tabBarIconStyle: {
+    top: Platform.OS === 'ios' ? 20 : 10,  
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});

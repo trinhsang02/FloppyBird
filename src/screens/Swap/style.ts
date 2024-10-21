@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet, TextInput } from "react-native";
 const styles = StyleSheet.create({
     container: {
         // backgroundColor: 'white',
-        flex: 1,
+        flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
         borderTopLeftRadius: 24,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         paddingHorizontal: 18,
         marginBottom: 10,
-        marginHorizontal: 24,
+        marginHorizontal: 15,
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "#eee",
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 13,
         paddingHorizontal: 24,
-        marginHorizontal: 24,
+        marginHorizontal: 15,
         width: "auto",
     },
     buttonDisabled: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 13,
         paddingHorizontal: 24,
-        marginHorizontal: 24,
+        marginHorizontal: 15,
         width: "auto",
     },
     buttonLoading: {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 13,
         paddingHorizontal: 24,
-        marginHorizontal: 24,
+        marginHorizontal: 15,
         width: "auto",
     },
     buttonError: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 13,
         paddingHorizontal: 24,
-        marginHorizontal: 24,
+        marginHorizontal: 15,
         width: "auto",
     },
     

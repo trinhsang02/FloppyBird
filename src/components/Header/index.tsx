@@ -6,8 +6,8 @@ import { styles } from "./styles";
 
 interface HeaderData {
     address: string;
-    screenName: string; // Thêm prop mới
-}
+    screenName: string; 
+}   
 
 interface HeaderData {
     address: string;

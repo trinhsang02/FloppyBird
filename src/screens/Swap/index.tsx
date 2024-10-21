@@ -341,7 +341,7 @@ const Swap = () => {
             coins.coin1 === "FLP" &&
             Number(coinAmount1) <= Number(balance.coin1) ? (
             <View style={styles.approvecontainer}>
-              <InformationCircleIcon color = 'black'/>
+              <InformationCircleIcon color = 'black' />
               <View
                 style={{
                   flexDirection: "column",
