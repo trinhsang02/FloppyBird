@@ -33,6 +33,7 @@ import { State, actionCreators } from "../../redux";
 import { useSelector } from "react-redux";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { HeaderBackButton } from "@react-navigation/elements";
+import Header from "../../components/Header";
 
 const Store: React.FC = () => {
   const {
@@ -156,11 +157,11 @@ const Store: React.FC = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {/* <View style={styles.header}>
-        <HeaderBackButton onPress={() => navigation.goBack()} />
-      </View> */}
+       <Header address={address} screenName="Store"/>
+
         <View style={styles.connectedView}>
-          <View style={styles.card}>
+          {/* FLP Balance */}
+          {/* <View style={styles.card}>
             <View style={{
               flexDirection: "row",
               alignItems: "center",
@@ -175,10 +176,10 @@ const Store: React.FC = () => {
                 {parseFloat((userTokenBalance as any)?.toString()) / 1e18}
               </Text>
             </View>
-          </View>
+          </View> */}
 
-
-          <View style={styles.card}>
+            {/* RON balance */}
+          {/* <View style={styles.card}>
             <View style={{
               flexDirection: "row",
               alignItems: "center",
@@ -193,7 +194,7 @@ const Store: React.FC = () => {
                 {parseFloat((ronBalance?.value as any)?.toString()) / 1e18}
               </Text>
             </View>
-          </View>
+          </View> */}
           <View style={styles.card}>
             <Text>NFT for sells:</Text>
             <ScrollView

@@ -34,6 +34,7 @@ import {
 } from "../../contracts/utils/getAbis";
 import { parseEther } from "../../contracts/utils/parseEther";
 import {ArrowPathIcon, InformationCircleIcon} from 'react-native-heroicons/outline'
+import Header from "../../components/Header";
 
 const Swap = () => {
   const { address } = useStateContext();
@@ -249,9 +250,10 @@ const Swap = () => {
         source={require('../../assets/images/Background_Store.png')}
         style={{ flex: 1 }}
       >
+        <Header address={address} screenName="Swap"/>
         <View style={styles.container}>
           {/* <Text style={styles.title}>Exchange</Text> */}
-          <Text style={styles.text}>Swap your coins</Text>
+          {/* <Text style={styles.text}>Swap your coins</Text> */}
           <View style={styles.rectangle}>
             <View style={styles.coinContainer}>
               <Text style={styles.header}>{"You sell :"}</Text>
