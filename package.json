@@ -12,6 +12,7 @@
     "@expo/vector-icons": "^14.0.4",
     "@heroicons/react": "^2.1.5",
     "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-native-community/blur": "^4.4.1",
     "@react-native-community/netinfo": "9.3.10",
     "@react-native-vector-icons/ionicons": "^7.4.0-alpha.34",
     "@react-navigation/bottom-tabs": "^6.5.20",
@@ -26,6 +27,7 @@
     "expo-application": "~5.3.0",
     "expo-dev-client": "^4.0.15",
     "expo-linear-gradient": "~13.0.2",
+    "expo-navigation-bar": "~3.0.7",
     "expo-splash-screen": "^0.27.5",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.12.1",
@@ -49,8 +51,7 @@
     "redux-thunk": "^3.1.0",
     "typescript": "^5.3.0",
     "viem": "1.21.4",
-    "wagmi": "1.4.13",
-    "expo-navigation-bar": "~3.0.7"
+    "wagmi": "1.4.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
