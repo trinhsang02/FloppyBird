@@ -47,7 +47,6 @@ import { State, actionCreators } from "../../redux";
 import { useSelector } from "react-redux";
 import { ImageBackground } from 'react-native';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import Frame from "../../components/frame/frame";
 import { toGwei } from "../../contracts/utils/parseEther";
 import { changeBirdColor } from "../../redux/action-creators";
 import { Alert } from "react-native";

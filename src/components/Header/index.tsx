@@ -3,6 +3,12 @@ import { Text, View, TouchableOpacity } from "react-native";
 import { UserCircleIcon, ArrowLeftCircleIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./styles";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type RootStackParamList = {
+  Owns: undefined;
+  // Add other screens here as needed
+};
 
 interface HeaderData {
     address: string;
@@ -15,7 +21,7 @@ interface HeaderData {
 }
 
 const Header: React.FC<HeaderData> = ({ address, screenName }) => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const shortenAddress = (address: string) => {
         return `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -41,7 +47,9 @@ const Header: React.FC<HeaderData> = ({ address, screenName }) => {
                     <ArrowLeftCircleIcon color='black' size="30" />
                 </TouchableOpacity>
                 <Text style={styles.Address}>{shortenAddress(address)}</Text>
-                <UserCircleIcon color='black' size="40" />
+                <TouchableOpacity onPress={() => navigation.navigate('Owns')}>
+                    <UserCircleIcon color='black' size="40" />
+                </TouchableOpacity>
             </View>
             <View style={styles.screenDescription}>
                 <Text style={[styles.description]}>

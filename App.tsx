@@ -13,6 +13,7 @@ import { Store } from "./src/screens/Store";
 import Swap from "./src/screens/Swap";
 import NFTDetail from "./src/screens/NftDetail";
 import NFTDetailList from "./src/screens/NftDetail_forList";
+import { Owns } from "./src/screens/Owns";
 
 import { StateContextProvider } from "./src/context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -40,6 +41,7 @@ export default function App() {
         <Stack.Screen name="StoreMain" component={Store} options={{ headerShown: false }} />
         <Stack.Screen name="NftDetailList" component={NFTDetailList} options={{ headerShown: false }} />
         <Stack.Screen name="NftDetail" component={NFTDetail} options={{ headerShown: false }} />
+        <Stack.Screen name="Owns" component={Owns} options={{ headerShown: false }} />
       </Stack.Navigator>
     );
   }

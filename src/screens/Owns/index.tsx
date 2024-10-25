@@ -33,7 +33,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ChevronDownIcon } from "react-native-heroicons/outline";
 import Header from "../../components/Header";
 
-const Store: React.FC = () => {
+const Owns: React.FC = () => {
   const {
     isConnected,
     address,
@@ -194,60 +194,10 @@ const Store: React.FC = () => {
             </View>
           </View> */}
 
-          {/* Trend now block */}
-          <View style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignContent: "center",
-            marginTop: 10,
-            paddingHorizontal: 10,
-          }}>
-            <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
-              <Text style={{ fontSize: 15, color: "white" }}>Trending Now </Text>
-              <Image
-                source={require('../../../src/assets/images/fire.png')}
-                style={{ width: 7, height: 14 }}
-              />
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={{ fontSize: 15, color: "white", marginRight: 5 }}>See More</Text>
-              <ChevronDownIcon size={15} color="white" />
-            </View>
 
-          </View>
-          <View style={styles.card}>
-            {/* <Text>NFT for sells:</Text> */}
-
+           <View style={styles.card}>
             <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              style={{ marginTop: 20 }}
-            >
-              {state.listedNfts && state?.listedNfts.length > 0 ? (
-                state.listedNfts?.map((nft, index) => {
-                  return (
-                    <NFTCard
-                      key={index}
-                      nft={nft?._j}
-                      isLoading={false}
-                      id={nfts[index]?.tokenId}
-                      price={nfts[index]?.price as any}
-                      isTransfer={true}
-                      isList={false}
-                      onPress={() => handleCardPress(nft, index)}
-                    />
-                  );
-                })
-              ) : (
-                <Text>No Collectibles</Text>
-              )}
-            </ScrollView>
-          </View>
-
-           {/* <View style={styles.card}>
-            <Text>Your NFT:</Text>
-            <ScrollView
-              horizontal={true}
+              horizontal={false}
               showsHorizontalScrollIndicator={false}
               style={{ marginTop: 20 }}
             >
@@ -271,7 +221,7 @@ const Store: React.FC = () => {
                 <Text>No Collectibles</Text>
               )}
             </ScrollView>
-          </View>  */}
+          </View> 
 
         </View>
       </ScrollView>
@@ -279,4 +229,4 @@ const Store: React.FC = () => {
   );
 };
 
-export { Store };
+export { Owns };
