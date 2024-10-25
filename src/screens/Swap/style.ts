@@ -1,9 +1,7 @@
-import { Icon } from "ionicons/dist/types/components/icon/icon";
 import { Dimensions, StyleSheet, TextInput } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: 'white',
         flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
@@ -147,7 +145,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         height: 100,
         marginHorizontal: 23
-    
     },
     accessory: {
         width: Dimensions.get('window').width,
@@ -169,7 +166,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 16,
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,
-       
     },
  
 });

@@ -12,7 +12,6 @@ import {
 import { NftProps } from "../../type";
 import { useNavigation } from "@react-navigation/native";
 import { ImageBackground } from 'react-native';
-import { HeaderBackButton } from "@react-navigation/elements";
 import {
   useAccount,
   useContractRead,
@@ -33,10 +32,11 @@ import {
   getFloppyAbi,
 } from "../../contracts/utils/getAbis";
 import { useStateContext } from "../../context";
-import Frame from "../../components/frame/frame";
 import { parseEther } from "../../contracts/utils/parseEther";
 import Header from "../../components/Header";
-
+import NFTCard from "../../components/NFTCard";
+import { InformationCircleIcon } from "react-native-heroicons/outline";
+import styles from "./style";
 
 
 
@@ -201,91 +201,77 @@ const NFTDetail = ({ route }) => {
 
   return (
     <ImageBackground
-    source={require('../../assets/images/Background_Store.png')}
-    style={{ flex: 1 }}
-  >
-    <Header address={address} screenName="Store"/>
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Frame />
-        {isShowDefaultImageBlueBird && (
-          <Image
-            source={require("../../assets/images/bluebird-midflap.png")}
-            style={styles.overlayImage}
-          />
-        )}
-        {isShowDefaultImageRedBird && (
-          <Image
-            source={require("../../assets/images/redbird-midflap.png")}
-            style={styles.overlayImage}
-          />
-        )}
-        {isShowIPFSimage && (
-          <Image
-            source={require("../../assets/images/yellowbird-midflap.png")}
-            style={styles.overlayImage}
-          />
-        )}
-
-        <Text style={styles.title}>
-          {" "}
-          The Flappy Bird NFT #{(id as any)?.toString()}{" "}
-        </Text>
-
-
-        <View style={styles.containerPrice}>
-          <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
-            {parseFloat((price as any)?.toString()) / 1e18}
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              source={require("../../../src/assets/images/medal_gold.png")}
-              style={styles.iconCoin}
-            />
-            <Text style={styles.unitText}>FLP</Text>
+      source={require('../../assets/images/Background_Store.png')}
+      style={{ flex: 1 }}
+    >
+      <Header address={address} screenName="Store" />
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <View style={styles.imageContainer}>
+            {isShowDefaultImageBlueBird && (
+              <Image
+                source={require("../../assets/images/bluebird-midflap.png")}
+                style={styles.overlayImage}
+              />
+            )}
+            {isShowDefaultImageRedBird && (
+              <Image
+                source={require("../../assets/images/redbird-midflap.png")}
+                style={styles.overlayImage}
+              />
+            )}
+            {isShowIPFSimage && (
+              <Image
+                source={require("../../assets/images/yellowbird-midflap.png")}
+                style={styles.overlayImage}
+              />
+            )}
           </View>
+          <View style={styles.nftInfo}>
+              <Text style={styles.title}>
+                {" "}
+                The Flappy Bird NFT #{(id as any)?.toString()}{" "}
+              </Text>
 
+              <View style={styles.containerPrice}>
+                <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
+                  {parseFloat((price as any)?.toString()) / 1e18} {" "}
+                </Text>
+                <Image
+                  source={require("../../../src/assets/images/medal_gold.png")}
+                  style={styles.iconCoin}
+                />
+              </View>
+            </View>
         </View>
 
 
         {(amountApproved?.toString() as any as number) < nftPrice &&
           parseEther(userFlpBalance?.toString()) > parseEther(nftPrice) ? (
           <View style={styles.approvecontainer}>
-            <Image
-              source={require("../../assets/icons/warning.png")}
-              style={{
-                width: 20,
-                height: 20,
-              }}
-            />
+            <InformationCircleIcon color='black' />
             <View
               style={{
                 flexDirection: "column",
                 marginLeft: 10,
-              }}
-            >
+              }}>
               <Text
                 style={{
-                  color: "#FFFFFF",
+                  color: "black",
                   fontSize: 15,
                   textAlign: "left",
                   marginBottom: 10,
-                  fontWeight: "600",
+                  fontWeight: "600"
                 }}
               >
                 Approve spending cap
               </Text>
               <Text
                 style={{
-                  color: "#FFFFFF",
+                  color: "black",
                   fontSize: 15,
                   textAlign: "left",
-                  fontWeight: "200",
+                  fontWeight: "200"
                 }}
               >
                 Your current spending cap is {parseEther(amountApproved)} FLP.
@@ -294,7 +280,7 @@ const NFTDetail = ({ route }) => {
             </View>
           </View>
         ) : null}
-        {/* Button Place Bid Now */}
+        {/* Button Place Bid Now*/}
 
         <View style={styles.footer}>
           {parseEther(userFlpBalance?.toString()) > parseEther(nftPrice) ? (
@@ -312,112 +298,10 @@ const NFTDetail = ({ route }) => {
           )}
         </View>
       </View>
-    </View>
-  </ImageBackground>
+    </ImageBackground>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    paddingTop: 20,
-    paddingLeft: 10,
-  },
-  content: {
-    flex: 1,
-  },
-  footer: {
-    marginTop: 15,
-    borderTopWidth: 1,
-    borderColor: "#FFFFFF",
-  },
-  button: {
-    backgroundColor: "#203bc7", //cyan
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  disabledButton: {
-    backgroundColor: "#5a84d1",
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  buttonError: {
-    backgroundColor: "#eb2121",
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-  },
-  overlayImage: {
-    position: "absolute",
-    marginTop: 200,
-    marginLeft: 175,
-    width: 100,
-    height: 100,
-    resizeMode: "contain",
-    transform: [{ translateX: -50 }, { translateY: -50 }],
-  },
-  containerPrice: {
-    backgroundColor: "#528B8B",
-    borderRadius: 10,
-    paddingVertical: 8,
-    padding: 12,
-    marginTop: 30,
-    marginBottom: 15,
-    alignItems: "center",
-    flexDirection: "row",
-    width: "auto",
-  },
-  text: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 22,
-    fontWeight: "bold",
-    flex: 1,
-  },
-  unitText: {
-    color: "white",
-    fontSize: 14,
-    marginLeft: 5,
-  },
-  iconCoin: {
-    width: 24,
-    height: 24,
-  },
-  approvecontainer: {
-    flexDirection: "row",
-    backgroundColor: "#04252F",
-    borderRadius: 8,
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    paddingBottom: 5,
-    marginBottom: 13,
-    marginTop: 15,
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    height: 100,
-  },
-  changeSkinButton: {
-    backgroundColor: "#203bc7",
-    padding: 9,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 1,
-  },
-});
 
 export default NFTDetail;
 

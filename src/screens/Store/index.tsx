@@ -23,16 +23,14 @@ import {
 
 import { bscTestnet } from "wagmi/chains";
 import NFTCard from "../../components/NFTCard";
-import ICOCard from "../../components/ICOCard";
 import { WriteContract } from "../../components/WriteContract";
-import Button from "../../components/Button";
 import { useStateContext } from "../../context";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { State, actionCreators } from "../../redux";
 import { useSelector } from "react-redux";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { HeaderBackButton } from "@react-navigation/elements";
+import { ChevronDownIcon } from "react-native-heroicons/outline";
 import Header from "../../components/Header";
 
 const Store: React.FC = () => {
@@ -157,7 +155,7 @@ const Store: React.FC = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-       <Header address={address} screenName="Store"/>
+        <Header address={address} screenName="Store" />
 
         <View style={styles.connectedView}>
           {/* FLP Balance */}
@@ -178,7 +176,7 @@ const Store: React.FC = () => {
             </View>
           </View> */}
 
-            {/* RON balance */}
+          {/* RON balance */}
           {/* <View style={styles.card}>
             <View style={{
               flexDirection: "row",
@@ -195,8 +193,31 @@ const Store: React.FC = () => {
               </Text>
             </View>
           </View> */}
+
+          {/* Trend now block */}
+          <View style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignContent: "center",
+            marginTop: 10,
+            paddingHorizontal: 10,
+          }}>
+            <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
+              <Text style={{ fontSize: 15, color: "white" }}>Trending Now </Text>
+              <Image
+                source={require('../../../src/assets/images/fire.png')}
+                style={{ width: 7, height: 14 }}
+              />
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text style={{ fontSize: 15, color: "white", marginRight: 5 }}>See More</Text>
+              <ChevronDownIcon size={15} color="white" />
+            </View>
+
+          </View>
           <View style={styles.card}>
-            <Text>NFT for sells:</Text>
+            {/* <Text>NFT for sells:</Text> */}
+
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -222,7 +243,8 @@ const Store: React.FC = () => {
               )}
             </ScrollView>
           </View>
-          <View style={styles.card}>
+
+           <View style={styles.card}>
             <Text>Your NFT:</Text>
             <ScrollView
               horizontal={true}
@@ -249,10 +271,8 @@ const Store: React.FC = () => {
                 <Text>No Collectibles</Text>
               )}
             </ScrollView>
-          </View>
-          {/* <Button text="Disconnect Wallet" onPress={()=>{}} /> */}
-          {/* <WriteContract /> */}
-          {/* refreshing ={} */}
+          </View> 
+
         </View>
       </ScrollView>
     </ImageBackground>

@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         borderRadius: 20,
         justifyContent: "space-between",
+        marginHorizontal: 10,
     },
     nftprice: {
       backgroundColor: "#0B1E5B",
@@ -51,11 +52,12 @@ const styles = StyleSheet.create({
       justifyContent: "center",
     },
     NFTName: {
-        color: "Black",
+        color: "white",
         fontWeight: "bold",
         textAlign: "auto",
         fontSize: 16,
-        marginBottom: 10,
+        marginBottom: 5,
+        marginTop: 5,
         flexWrap: 'wrap', 
         width: '50%', 
       },

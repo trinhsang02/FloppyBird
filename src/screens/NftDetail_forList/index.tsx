@@ -32,6 +32,8 @@ import {
   getFloppyAddress,
 } from "../../contracts/utils/getAddress";
 // import { WriteContract } from '../../components/WriteContract';
+import { InformationCircleIcon } from "react-native-heroicons/outline";
+
 
 import { bscTestnet } from "wagmi/chains";
 import NFTCard from "../../components/NFTCard";
@@ -45,11 +47,12 @@ import { State, actionCreators } from "../../redux";
 import { useSelector } from "react-redux";
 import { ImageBackground } from 'react-native';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { HeaderBackButton } from "@react-navigation/elements";
 import Frame from "../../components/frame/frame";
 import { toGwei } from "../../contracts/utils/parseEther";
 import { changeBirdColor } from "../../redux/action-creators";
 import { Alert } from "react-native";
+import Header from "../../components/Header";
+import styles from "./styles";
 
 const NFTDetailList = ({ route }) => {
   const navigation = useNavigation();
@@ -61,19 +64,6 @@ const NFTDetailList = ({ route }) => {
   const isShowDefaultImageRedBird = id?.toString() === "2";
   const isShowIPFSimage = id?.toString() === "0";
 
-  const handlePlaceBid = () => {
-    console.log("Place Bid Now button pressed");
-  };
-
-  const handleFavorite = () => {
-    console.log("Favorite button pressed");
-  };
-  const handleShare = () => {
-    console.log("Share button pressed");
-  };
-  const handleAdd = () => {
-    console.log("Add button pressed");
-  };
 
   const { address } = useAccount();
   const { fetchListedNfts, fetchUserNfts } = useStateContext();
@@ -200,10 +190,12 @@ const NFTDetailList = ({ route }) => {
       source={require('../../assets/images/Background_Store.png')}
       style={{ flex: 1 }}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Frame />
+      <Header address={address} screenName="Store" />
+
+
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <View style={styles.imageContainer}>
             {isShowDefaultImageBlueBird && (
               <Image
                 source={require("../../assets/images/bluebird-midflap.png")}
@@ -222,8 +214,9 @@ const NFTDetailList = ({ route }) => {
                 style={styles.overlayImage}
               />
             )}
-
-            <View style={styles.containerPrice}>
+          </View>
+          <View style={styles.nftInfo}>
+            {/* <TouchableOpacity style={styles.containerPrice}> */}
               <TextInput
                 style={styles.text}
                 numberOfLines={1}
@@ -234,171 +227,71 @@ const NFTDetailList = ({ route }) => {
                 maxLength={10}
                 editable={approvedAddress?.toString().toLowerCase() == marketPlaceAddress}
               />
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {/* </TouchableOpacity> */}
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
                   source={require("../../../src/assets/images/medal_gold.png")}
                   style={styles.iconCoin}
                 />
-                <Text style={styles.unitText}>FLP</Text>
+                <Text >{" "}FLP</Text>
               </View>
-            </View>
-            <Text style={styles.title}> The Flappy Bird NFT #{id.toString()} </Text>
-            {approvedAddress?.toString().toLowerCase() != marketPlaceAddress ? (
-              <View style={styles.approvecontainer}>
-                <Image
-                  source={require('../../assets/icons/warning.png')}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
-                <View style={{
-                  flexDirection: "column",
-                  marginLeft: 10,
-                }}>
-                  <Text
-                    style={{
-                      color: "#FFFFFF",
-                      fontSize: 15,
-                      textAlign: "left",
-                      marginBottom: 10,
-                      fontWeight: "600"
-                    }}
-                  >
-                    Approve transfering the NFT
-                  </Text>
-                  <Text
-                    style={{
-                      color: "#FFFFFF",
-                      fontSize: 15,
-                      textAlign: "left",
-                      fontWeight: "200"
-                    }}
-                  >
-                    This NFT cannot be listed for transfer on the market yet. Please approve it first.
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* select skin button */}
-            <TouchableOpacity style={styles.button}
-              onPress={() => handleBirdColorChange()}
-            >
-              <Text style={styles.buttonText}>Select Skin</Text>
-            </TouchableOpacity>
+          </View>
 
-
-            {/* Button to list now */}
-            <View>
-              <TouchableOpacity
-                style={buttonStyle()}
-                onPress={() => handleListNFT()}
-                disabled={txLoading}
+        </View>
+        {/* <Text style={styles.title}> The Flappy Bird NFT #{id.toString()} </Text> */}
+        {approvedAddress?.toString().toLowerCase() != marketPlaceAddress ? (
+          <View style={styles.approvecontainer}>
+            <InformationCircleIcon color={"black"}/>
+            <View style={{
+              flexDirection: "column",
+              marginLeft: 10,
+            }}>
+              <Text
+                style={{
+                  color: "black",
+                  fontSize: 15,
+                  textAlign: "left",
+                  marginBottom: 10,
+                  fontWeight: "600"
+                }}
               >
-                <Text style={styles.buttonText}>{buttonText()}</Text>
-              </TouchableOpacity>
+                Approve transfering the NFT
+              </Text>
+              <Text
+                style={{
+                  color: "black",
+                  fontSize: 15,
+                  textAlign: "left",
+                  fontWeight: "200"
+                }}
+              >
+                This NFT cannot be listed for transfer on the market yet. Please approve it first.
+              </Text>
             </View>
           </View>
+        ) : null}
+        {/* select skin button */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button}
+            onPress={() => handleBirdColorChange()}
+          >
+            <Text style={styles.buttonText}>Select</Text>
+          </TouchableOpacity>
+
+
+          {/* Button to list now */}
+          <TouchableOpacity
+            style={buttonStyle()}
+            onPress={() => handleListNFT()}
+            disabled={txLoading}
+          >
+            <Text style={styles.buttonText}>{buttonText()}</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableWithoutFeedback>
+      </View>
     </ImageBackground>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    
-    
-  },
-  header: {
-    marginBottom: 15,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-  },
-  content: {
-    flex: 1,
-  },
-  image: {
-    width: 373,
-    height: 453,
-    resizeMode: "contain",
-    justifyContent: "center",
-  },
-  footer: {
-    padding: 10,
-    borderTopWidth: 1,
-    borderColor: "#FFFFFF",
-  },
-  button: {
-    backgroundColor: "#203bc7", //cyan
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  disabledButton: {
-    backgroundColor: "#5a84d1",
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  overlayImage: {
-    position: "absolute",
-    marginTop: 200,
-    marginLeft: 175,
-    width: 100,
-    height: 100,
-    resizeMode: "contain",
-    transform: [{ translateX: -50 }, { translateY: -50 }],
-  },
-
-  containerPrice: {
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: "#808080",
-    // paddingVertical: 8,
-    padding: 10,
-    marginTop: 30,
-    marginBottom: 15,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  text: {
-    color: "black",
-    textAlign: "center",
-    fontSize: 20,
-    flex: 1,
-  },
-  unitText: {
-    color: "Black",
-    fontSize: 14,
-    marginLeft: 5,
-  },
-  iconCoin: {
-    width: 24,
-    height: 24,
-  },
-  approvecontainer: {
-    flexDirection: "row",
-    backgroundColor: "#04252F",
-    borderRadius: 8,
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    paddingBottom: 5,
-    marginBottom: 13,
-    marginTop: 15,
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    height: 100,
-  },
-});
 
 export default NFTDetailList;
