@@ -6,6 +6,7 @@ import { styles } from "./styles";
 
 import { Start } from "./Start";
 import { GameOver } from "./GameOver";
+import { Betting } from "./Betting";
 import { Text, View, Image } from "react-native";
 import BASE from "../../../assets/images/base.png";
 
@@ -50,6 +51,8 @@ const Game = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [currentPoints, setCurrentPoints] = useState(0);
   const [scoreSaved, setScoreSaved] = useState(0);
+  const [isBetting, setIsBetting] = useState(false); // NEW: State betting
+  const [betAmount, setBetAmount] = useState(0); // NEW: Betting value
   const { address } = useAccount();
   const gameEngineRef = useRef();
   const skin = useSelector((state: State) => state.changeBirdColor.birdColor);
@@ -61,12 +64,25 @@ const Game = () => {
     setIsRunning(false);
     setIsGameOver(false);
     setScoreSaved(0);
+    setIsBetting(false);
   };
 
   const handleOnStart = () => {
-    setIsRunning(true);
-    setIsGameOver(false);
-    setScoreSaved(0);
+    setIsBetting(true); 
+    // setIsRunning(true);
+    // setIsGameOver(false);
+    // setScoreSaved(0);
+  };
+
+  const handleOnBet = (amount) => {
+    setBetAmount(amount); // Betting amount
+    setIsBetting(false);
+    setIsRunning(true); 
+  };
+
+  const handleSkipBet = () => {
+    setIsBetting(false); 
+    setIsRunning(true); 
   };
 
   const handleOnGameOver = async () => {
@@ -86,9 +102,10 @@ const Game = () => {
       case "new_point":
         setCurrentPoints(currentPoints + 1);
         break;
+
     }
   };
-
+  // Score view
   const renderImage = (Points) => {
     if (Points < 10) {
       const imageStyle = Points === 1
@@ -123,9 +140,13 @@ const Game = () => {
     }
   };
 
-  if (!running && !isGameOver) {
+  if (!running && !isGameOver && !isBetting) {
     addScoreToFirebase(address?.toString(), currentPoints);
     return <Start handleOnStart={handleOnStart} />;
+  }
+
+  if (!running && !isGameOver && isBetting) {
+    return <Betting handleOnBet={handleOnBet} handleSkipBet={handleSkipBet} />;
   }
 
   if (!running && isGameOver) {

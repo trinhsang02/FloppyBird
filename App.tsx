@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as NavigationBar from 'expo-navigation-bar';
 import { Platform, StyleSheet } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context'; // đảm bảo không bị che bởi thanh trạng thái
+import { SafeAreaView } from 'react-native-safe-area-context'; 
 
 import { Home } from "./src/screens/Homes";
 import { Store } from "./src/screens/Store";
@@ -48,33 +48,33 @@ export default function App() {
 
   function StoreTabNavigation() {
     return (
-        <Tab.Navigator
-          screenOptions={{
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: 'blue',
+          tabBarInactiveTintColor: 'black',
+          tabBarStyle: styles.tabBarStyle,
+          tabBarIconStyle: styles.tabBarIconStyle,
+        }}
+      >
+        <Tab.Screen
+          name="Store"
+          component={StoreStackNavigator}
+          options={{
             headerShown: false,
-            tabBarActiveTintColor: 'blue',
-            tabBarInactiveTintColor: 'black',
-            tabBarStyle: styles.tabBarStyle,   
-            tabBarIconStyle: styles.tabBarIconStyle,
-          }}
-        >
-          <Tab.Screen
-            name="Store"
-            component={StoreStackNavigator}
-            options={{
-              headerShown: false,
-              tabBarLabel: '',
-              tabBarIcon: ({ color, size }) => <ShoppingBagIcon color={color} size={size} />
-            }} />
-          <Tab.Screen
-            name="Swap"
-            component={Swap}
-            options={{
-              headerShown: false,
-              tabBarLabel: '',
-              tabBarIcon: ({ color, size }) => <ArrowPathRoundedSquareIcon color={color} size={size} />
-            }} />
-        </Tab.Navigator>
-     
+            tabBarLabel: '',
+            tabBarIcon: ({ color, size }) => <ShoppingBagIcon color={color} size={size} />
+          }} />
+        <Tab.Screen
+          name="Swap"
+          component={Swap}
+          options={{
+            headerShown: false,
+            tabBarLabel: '',
+            tabBarIcon: ({ color, size }) => <ArrowPathRoundedSquareIcon color={color} size={size} />
+          }} />
+      </Tab.Navigator>
+
     );
   }
 
@@ -85,6 +85,10 @@ export default function App() {
           component={Home}
           options={{ headerShown: false }}
         />
+        {/* <Stack.Screen name="Betting"
+          component={Betting}
+          options={{ headerShown: false }}
+        /> */}
         <Stack.Screen name="StoreTab"
           component={StoreTabNavigation}
           options={{ headerShown: false }} />
@@ -108,10 +112,10 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     backgroundColor: Platform.OS === 'android' ? '#D9D9D9' : '#FFFFFF',
     position: 'relative',
-    height: Platform.OS === 'ios' ? 60 : 50, 
+    height: Platform.OS === 'ios' ? 60 : 50,
   },
   tabBarIconStyle: {
-    top: Platform.OS === 'ios' ? 20 : 10,  
+    top: Platform.OS === 'ios' ? 20 : 10,
     alignItems: 'center',
     justifyContent: 'center',
   }

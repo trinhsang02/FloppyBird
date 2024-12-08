@@ -155,7 +155,7 @@ const Owns: React.FC = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Header address={address} screenName="Store" />
+        <Header address={address} screenName="Owns" />
 
         <View style={styles.connectedView}>
           {/* FLP Balance */}
@@ -195,33 +195,35 @@ const Owns: React.FC = () => {
           </View> */}
 
 
-           <View style={styles.card}>
+          <View style={styles.card}>
             <ScrollView
               horizontal={false}
               showsHorizontalScrollIndicator={false}
-              style={{ marginTop: 20 }}
+              style={{ marginTop: 20, marginBottom: 10 }}
             >
               {state?.userNfts && state?.userNfts.length > 0 ? (
                 state?.userNfts?.map((nft, index) => {
 
                   return (
-                    <NFTCard
-                      key={index}
-                      nft={nft?.tokenUrl?._j}
-                      isLoading={false}
-                      id={nft?.tokenId}
-                      price={1200000}
-                      isTransfer={false}
-                      isList={true}
-                      onPress={() => handleDetailListPress(nft, nft?.tokenId)}
-                    />
+                    <View key={index} style={{ marginBottom: 8, paddingHorizontal: 5 }}>
+                      <NFTCard
+                        key={index}
+                        nft={nft?.tokenUrl?._j}
+                        isLoading={false}
+                        id={nft?.tokenId}
+                        price={1200000}
+                        isTransfer={false}
+                        isList={true}
+                        onPress={() => handleDetailListPress(nft, nft?.tokenId)}
+                      />
+                    </View>
                   );
                 })
               ) : (
                 <Text>No Collectibles</Text>
               )}
             </ScrollView>
-          </View> 
+          </View>
 
         </View>
       </ScrollView>

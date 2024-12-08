@@ -17,6 +17,9 @@ export const styles = StyleSheet.create({
     },
     screenDescription: {
         backgroundColor: "#D9D9D9",
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: "center",
     },
     Address: {
         color: "white",
@@ -30,6 +33,6 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         marginTop: 10,
         marginBottom: 10,
-        textAlign: "center",
+        textAlign: "center", 
     },
 });

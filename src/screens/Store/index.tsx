@@ -221,7 +221,7 @@ const Store: React.FC = () => {
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              style={{ marginTop: 20 }}
+              style={{ marginTop: 20, marginBottom: 10 }}
             >
               {state.listedNfts && state?.listedNfts.length > 0 ? (
                 state.listedNfts?.map((nft, index) => {
